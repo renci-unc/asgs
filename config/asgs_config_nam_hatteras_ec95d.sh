@@ -27,17 +27,17 @@
 
 # Fundamental
 
-INSTANCENAME=cfsamp      # "name" of this ASGS process
-COLDSTARTDATE=2013101400 # calendar year month day hour YYYYMMDDHH24
+INSTANCENAME=bobtest     # "name" of this ASGS process
+COLDSTARTDATE=2018040100 # calendar year month day hour YYYYMMDDHH24
 HOTORCOLD=coldstart      # "hotstart" or "coldstart"
 LASTSUBDIR=null          # path to previous execution (if HOTORCOLD=hotstart)
 HINDCASTLENGTH=30.0      # length of initial hindcast, from cold (days)
 REINITIALIZESWAN=no      # used to bounce the wave solution
 
 # Source file paths
-
-ADCIRCDIR=~/adcirc/trunk/work # ADCIRC executables
-SCRIPTDIR=~/asgs/trunk        # ASGS executables
+H="/home/bblanton/"
+ADCIRCDIR=${H}/ADCIRC/v52release/work # ADCIRC executables
+SCRIPTDIR=${H}/GitHub/renci-unc/asgs        # ASGS executables
 INPUTDIR=${SCRIPTDIR}/input/meshes/ec95d # grid and other input files
 OUTPUTDIR=${SCRIPTDIR}/output # post processing scripts
 PERL5LIB=${SCRIPTDIR}/PERL    # DateCale.pm perl module
@@ -47,7 +47,7 @@ PERL5LIB=${SCRIPTDIR}/PERL    # DateCale.pm perl module
 BACKGROUNDMET=on     # NAM download/forcing
 TIDEFAC=on           # tide factor recalc
 TROPICALCYCLONE=off  # tropical cyclone forcing
-WAVES=on             # wave forcing
+WAVES=off             # wave forcing
 VARFLUX=off          # variable river flux forcing
 
 # Computational Resources
@@ -63,7 +63,7 @@ NCPUCAPACITY=24
 CYCLETIMELIMIT="05:00:00"
 QUEUENAME=null
 SERQUEUE=null
-SCRATCHDIR=/projects/ncfs/data
+SCRATCHDIR=/scratch/bblanton/asgs
 
 # External data sources : Tropical cyclones
 
@@ -136,15 +136,16 @@ MINMAX=reset
 
 # Notification
 
-EMAILNOTIFY=yes         # yes to have host HPC platform email notifications
+EMAILNOTIFY=no         # yes to have host HPC platform email notifications
 NOTIFY_SCRIPT=ncfs_nam_notify.sh
-ACTIVATE_LIST="jason.fleming@seahorsecoastal.com jason.g.fleming@gmail.com"
-NEW_ADVISORY_LIST="jason.fleming@seahorsecoastal.com jason.g.fleming@gmail.com"
-POST_INIT_LIST="jason.fleming@seahorsecoastal.com jason.g.fleming@gmail.com"
-POST_LIST="jason.fleming@seahorsecoastal.com jason.g.fleming@gmail.com"
-JOB_FAILED_LIST="jason.fleming@seahorsecoastal.com jason.g.fleming@gmail.com"
-NOTIFYUSER=jason.fleming@seahorsecoasatal.com
-ASGSADMIN=jason.fleming@seahorsecoastal.com
+ems="bblanton@renci.org"
+ACTIVATE_LIST=$ems
+NEW_ADVISORY_LIST=$ems
+POST_INIT_LIST=$ems
+POST_LIST=$ems
+JOB_FAILED_LIST=$ems
+NOTIFYUSER=$ems
+ASGSADMIN=$ems
 
 # Post processing and publication
 
@@ -153,9 +154,9 @@ INITPOST=null_init_post.sh
 POSTPROCESS=ncfs_post.sh
 POSTPROCESS2=null_post.sh
 TARGET=hatteras
-OPENDAPHOST=br0.renci.org
+OPENDAPHOST=tds.renci.org
 OPENDAPUSER=ncfs
-OPENDAPBASEDIR=/projects/ncfs/opendap/data
+OPENDAPBASEDIR=/scratch/bblanton/asgs/data
 NUMCERASERVERS=2
 WEBHOST=webserver.hostingco.com
 WEBUSER=remoteuser
@@ -164,7 +165,7 @@ WEBPATH=/home/remoteuser/public_html/ASGS/outputproducts
 # Archiving
 
 ARCHIVE=null_archive.sh
-ARCHIVEBASE=/projects/ncfs/data
+ARCHIVEBASE=/scratch/bblanton/asgs
 ARCHIVEDIR=archive
 
 # Forecast ensemble members
@@ -172,6 +173,7 @@ ARCHIVEDIR=archive
 RMAX=default
 PERCENT=default
 ENSEMBLESIZE=1 # number of storms in the ensemble
+si=-1
 case $si in
 -1)
       # do nothing ... this is not a forecast

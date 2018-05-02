@@ -352,7 +352,6 @@ prep()
         if [[ ! -z $NAFILE  && $NAFILE != null ]]; then
            ln -s $INPUTDIR/$NAFILE $ADVISDIR/$ENSTORM/fort.13 2>> ${SYSLOG}
         fi
-      fi
     fi
     if [[ $HAVEARCHIVE = yes ]]; then
         # copy in the files that have already been preprocessed
@@ -1139,6 +1138,8 @@ while getopts "c:e:s:h" optname; do
 done
 #
 # Initialize variables accessed from ASGS config parameters to reasonable values
+echo ${SCRIPTDIR}
+echo . ${SCRIPTDIR}/config_defaults.sh
 . ${SCRIPTDIR}/config_defaults.sh
 # Initialize model parameters to appropriate values
 . ${SCRIPTDIR}/model_defaults.sh
